@@ -1,0 +1,113 @@
+Day 11: 2D-Arrays + More Review! locked
+by Shafaet
+Problem
+Submissions
+Leaderboard
+Discussions
+Editorial 
+Submissions will no longer be placed on the leaderboard. You may still attempt this problem for practice.
+
+Welcome to Day 11! Review everything we've learned so far by making a library catalogue in this video, or just jump right into the problem. We haven't discussed 2D Arrays in this series, but they're very similar to the regular 1D Arrays you're likely familiar with. If you are working in Java, check out Oracle's documentation. Similar documentation for 2D Arrays in other popular languages is easily found on the internet.
+
+Given a 6×66×6 2D Array, AA:
+
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+0 0 0 0 0 0
+We can find 1616 hourglasses in AA; we define an hourglass in AA to be a subset of values with indexes falling in this pattern in AA's graphical representation:
+
+a b c
+  d
+e f g
+The sum of an hourglass is the sum of the values within it.
+
+Your task is to calculate the sum of every hourglass in some 2D Array, AA, and print the largest value (maximum of the sums) as your answer.
+
+Input Format
+
+There are 66 lines of input, where each line contains 66 space-separated integers describing 2D Array AA; every value in AA will be in the inclusive range of ?9?9 to 99.
+
+Constraints 
+?9?A[i][j]?9?9?A[i][j]?9 
+0?i,j?50?i,j?5
+Output Format
+
+Print the largest (maximum) hourglass sum found in AA.
+
+Sample Input
+
+1 1 1 0 0 0
+0 1 0 0 0 0
+1 1 1 0 0 0
+0 0 2 4 4 0
+0 0 0 2 0 0
+0 0 1 2 4 0
+Sample Output
+
+19
+Explanation
+
+Sample Input AA contains the following hourglasses:
+
+1 1 1   1 1 0   1 0 0   0 0 0
+  1       0       0       0
+1 1 1   1 1 0   1 0 0   0 0 0
+
+0 1 0   1 0 0   0 0 0   0 0 0
+  1       1       0       0
+0 0 2   0 2 4   2 4 4   4 4 0
+
+1 1 1   1 1 0   1 0 0   0 0 0
+  0       2       4       4
+0 0 0   0 0 2   0 2 0   2 0 0
+
+0 0 2   0 2 4   2 4 4   4 4 0
+  0       0       2       0
+0 0 1   0 1 2   1 2 4   2 4 0
+The hourglass with the maximum sum (1919) is:
+
+2 4 4
+  2
+1 2 4
+
+
+Solution
+
+import java.io.*;
+import java.util.*;
+import java.text.*;
+import java.math.*;
+import java.util.regex.*;
+
+public class Solution {
+
+    public static void main(String[] args) {
+        
+        Scanner in = new Scanner(System.in);
+        
+    int arr[][] = new int[6][6];
+    int c = 0, d = -63, i;
+    boolean f=true;
+        
+    for(i=0; i < 6; i++){
+        for(int j=0; j < 6; j++){
+            arr[i][j] = in.nextInt();
+
+        }
+    }
+    for(i=1; i < 5; i++){
+        for(int j = 1; j < 5; j++){
+          c = arr[i][j]+arr[i-1][j-1]+arr[i-1][j]+arr[i-1][j+1]+arr[i+1][j-1]+arr[i+1][j]+arr[i+1][j+1];
+        if(d <= c)
+            {
+                d = c;
+            }
+        }
+
+    }
+        System.out.println(d);
+    }
+}

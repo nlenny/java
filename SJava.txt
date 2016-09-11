@@ -1,0 +1,124 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class TheStack {
+    private int[] stackArray;
+    private int stackSize;
+    private int topOfStack = -1;
+    
+    TheStack(int size){
+        stackSize = size;
+        stackArray = new int[size];
+        Arrays.fill(stackArray, -1); 
+    }
+    
+    
+    void push(int input){
+        if(topOfStack + 1 < stackSize){
+            topOfStack++;
+            stackArray[topOfStack] = input; 
+        }else{
+            System.out.println("The Stack is Full"); 
+        }
+        displayTheStack();
+        System.out.println("PUSHED " + input + " into the Stack"); 
+    }
+    
+    void pushMany(int[] multiPush){
+        int[] tmp = multiPush; 
+        for(int i = 0; i < tmp.length; i++){
+            push(tmp[i]);
+        }
+    }
+    
+    int pop(){
+       if(topOfStack >= 0){
+           displayTheStack();
+           System.out.println("POPPED " + stackArray[topOfStack] + " from the stack"); 
+           stackArray[topOfStack] = -1;
+           return stackArray[topOfStack--];
+       }else{
+           displayTheStack();
+           System.out.println("Stack is Empty, sorry");
+           return -1; 
+       } 
+    }
+    
+    void popAll(){
+        for(int i = topOfStack; i >= 0; i--){
+            pop(); 
+        }
+    }
+    
+    public void displayTheStack(){
+        for(int n = 0; n < 61; n++){
+            System.out.print("-");
+        }
+        System.out.println();
+        for(int n = 0; n < stackSize; n++){
+            System.out.format("| %2s "+ " ", n);
+            
+        }
+        System.out.println("|");
+        for(int n = 0; n < 61; n++){
+            System.out.print("-");
+        }
+        System.out.println();
+        for(int n = 0; n < stackSize; n++){
+            if(stackArray[n] == -1){
+                System.out.print("|     ");
+            }else{
+                System.out.print(String.format("| %2s "+ " ", stackArray[n]));
+            }
+        }
+        System.out.println("|");
+        for(int n = 0; n < 61; n++){
+            System.out.print("-");
+        }
+        System.out.println();
+    }
+
+    
+    int peek(){
+        displayTheStack();
+        System.out.println("PEEK " + stackArray[topOfStack] + " is at the top of the stack"); 
+        return stackArray[topOfStack]; 
+    }
+    
+}
+
+class A {
+    
+    public static void main(String[] args){
+        int[] arr = new int[10];
+        for(int i = 0; i < arr.length; i++){
+            arr[i] = (int)(Math.random()*100); 
+        }
+        
+        
+        TheStack OStack = new TheStack(10); 
+        OStack.push(10); 
+        OStack.push(15);
+        OStack.push(19);
+        OStack.push(39);
+        OStack.push(75);
+        
+        //OStack.peek();
+        
+        //OStack.pop(); 
+        
+        //OStack.peek(); 
+        
+        //OStack.pushMany(arr); 
+        OStack.push(80); 
+        OStack.push(101);
+        OStack.push(99);
+        OStack.push(50);
+        OStack.push(31);
+        OStack.push(90);
+        
+        //OStack.popAll(); 
+        OStack.displayTheStack(); 
+    }
+}

@@ -1,0 +1,87 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class TreeNode{
+    int data;
+    TreeNode left;
+    TreeNode right;
+    
+    TreeNode(int newData){
+        this.data = newData;
+        left = right = null; 
+    }
+}
+
+class BinaryTree{
+    TreeNode root;
+    
+    BinaryTree(){
+        root = null;
+    }
+    
+    BinaryTree(TreeNode newRoot){
+        this.root = newRoot;
+    }
+    
+    public void visit(TreeNode input){
+        System.out.print(input.data + " ");
+    }
+    
+    public void preOrder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        visit(root);
+        preOrder(root.left);
+        preOrder(root.right);
+    }
+    
+    public void inOrder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        inOrder(root.left);
+        visit(root);
+        inOrder(root.right);
+    }
+    
+    public void postOrder(TreeNode root){
+        if(root == null){
+            return;
+        }
+        postOrder(root.left);
+        postOrder(root.right);
+        visit(root); 
+    }
+}
+
+class A{
+    
+    public static void main(String[] args){
+        TreeNode six = new TreeNode(6);
+        TreeNode seven = new TreeNode(7);
+        TreeNode nine = new TreeNode(9);
+        TreeNode five = new TreeNode(5);
+        TreeNode two = new TreeNode(2);
+        TreeNode one = new TreeNode(1);
+        
+        seven.left = five;
+        seven.right = two;
+        
+        nine.left = one;
+        six.left = seven;
+        six.right = nine;
+        
+        BinaryTree bt = new BinaryTree(six);
+        System.out.print("Pre-Order is:  ");
+        bt.preOrder(bt.root); 
+        System.out.println(); 
+        System.out.print("In-Order is:   ");
+        bt.inOrder(bt.root);
+        System.out.println();
+        System.out.print("Post-Order is: ");
+        bt.postOrder(bt.root);
+        System.out.println(); 
+    }
+}

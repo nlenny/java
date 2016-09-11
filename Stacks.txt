@@ -1,0 +1,124 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+
+class Node{
+    int data;
+    Node next;
+    Node(){} 
+    Node(int newData){
+        this.data=newData;
+    }
+}
+
+class Link{
+    Node head;
+    Link(){
+        this.head=null;
+    }
+    Node addToTail(Node head, int input){
+        Node newNode = new Node(input);
+        if(head == null){
+            return head = newNode;
+        }
+        Node curr = head;
+        while(curr.next != null){
+            curr = curr.next;
+        }
+        if(curr.next == null){
+            curr.next = newNode;
+        }
+        return head; 
+    }
+    
+    Node addToMiddle(Node head, Node searchNode, int input){
+        Node newNode = new Node(input);
+        if(head == null){
+            return head = newNode;
+        }
+        Node curr = head;
+        while(curr.next != searchNode){
+            curr = curr.next;
+        }
+        if(curr.next == searchNode){
+            Node tmp = searchNode.next;
+            searchNode.next = newNode;
+            newNode.next = tmp;
+        }
+        return head; 
+    }
+    
+    Node addToHead(Node head, Node newNode, int input){
+        newNode = new Node(input);
+        if(head == null){
+            return head = newNode;
+        }else{
+            newNode = head;
+            head = head.next;
+            head = newNode; 
+        }
+        printList(head); 
+        return head; 
+    }
+    
+    void printList(Node head){
+        Node curr = head;
+        while(curr != null){
+            if(curr.next == null){
+                System.out.print(curr.data);
+            }else{
+                System.out.print(curr.data + " -> ");
+            }
+            curr = curr.next;
+        }
+        System.out.println(); 
+    }
+}
+
+
+class A{
+    public static void main(String[] args){
+        Node one = new Node(1);
+        Node two = new Node(2);
+        Node three = new Node(3);
+        Node four = new Node(4);
+        
+        one.next = two;
+        two.next = three;
+        three.next = four;
+        
+        Link a = new Link();
+        //a.printList(one); 
+        a.addToTail(one, 5);
+        //a.printList(one); 
+        //Node six = new Node(6); 
+        a.addToMiddle(one, two, 6);
+        //a.printList(one); 
+        
+        
+        Stack<Integer> stacky = new Stack<Integer>();
+        
+        Scanner scan = new Scanner(System.in);
+        int[] arr = new int[5];
+        for(int i = 0; i < arr.length; i++){
+            //arr[i] = scan.nextInt();
+            stacky.push(arr[i] = scan.nextInt()); 
+        }
+        for(int j = 0; j < arr.length; j++){
+            System.out.print(arr[j] + " | ");
+        }
+        System.out.println(); 
+        
+        int count = 0;
+        for(Integer s : stacky){
+            if(s%2==0){
+               count = count + s; 
+            }else{
+                System.out.print(s + "| ");
+            }
+        }
+        System.out.println(); 
+        System.out.println(count); 
+    }
+}

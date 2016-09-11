@@ -1,0 +1,69 @@
+Submissions will no longer be placed on the leaderboard. You may still attempt this problem for practice.
+
+Welcome to Day 9! Check out this video on recursion, or jump right into the problem.
+
+Euclid's Algorithm for Computing the GCD of two integers
+
+Given two integers, xx and yy, their GCDGCD (greatest common divisor) can be calculated recursively using Euclid's Algorithm, which essentially says that if xx equals yy, then GCD(x,y)=xGCD(x,y)=x; otherwise, GCD(x,y)=GCD(x?y,y)GCD(x,y)=GCD(x?y,y) if x>yx>y. Note that this logic can be further optimized for a more efficient implementation.
+
+Given the starter code in your editor, complete the function body so it returns the GCDGCD of two input integers, xx and yy.
+
+Input Format
+
+Two space-separated integers, xx and yy.
+
+Constraints 
+1?x,y?1061?x,y?106
+Output Format
+
+Print the GCDGCD of xx and yy as an integer.
+
+Sample Input
+
+1 5
+Sample Output
+
+1
+Explanation
+
+We are given x=1x=1 and y=5y=5. This explanation uses the subtraction implementation mentioned in the problem description, and is outlined in pseudocode below:
+
+int GCD(x,y): 
+    If x equals y, return x; 
+    Else, return GCD(x',y'), where x' = MAX(x,y) - MIN(x,y) and y' = MIN(x,y).
+GCD(1,5): 1?51?5, so return a call to GCD(5?1,1)GCD(5?1,1). 
+GCD(4,1): 4?14?1, so return a call to GCD(4?1,1)GCD(4?1,1). 
+GCD(3,1): 3?13?1, so return a call to GCD(3?1,1)GCD(3?1,1). 
+GCD(2,1): 2?12?1, so return a call to GCD(2?1,1)GCD(2?1,1). 
+GCD(1,1): 1=11=1, so we return xx (which is 11).
+
+The final return is passed back through the call stack as the return value for the original call. That is to say, GCD(1,1)GCD(1,1) returns 11 to GCD(2,1)GCD(2,1), the function that originally called it. GCD(2,1)GCD(2,1) then returns it to GCD(3,1)GCD(3,1), which returns it to GCD(4,1)GCD(4,1), which returns it to GCD(1,5)GCD(1,5). Thus GCD(1,5)GCD(1,5) returns a value of 11, which we print as our answer.
+
+Note: The algorithm used here is merely demonstrative and can be further optimized.
+
+
+
+// The Code
+
+import java.io.*;
+import java.util.*;
+public class Solution {
+    public static void main(String args[]){
+        Scanner sc = new Scanner(System.in);
+        //Take Input
+        int a = sc.nextInt();
+        int b = sc.nextInt();
+        
+        int gcd=find_gcd(a,b);
+        System.out.println(gcd);
+    }
+   static  int find_gcd(int a,int b){
+          //Write the base condition
+       if(a == b){
+           return a;
+       }
+       else
+           return Math.max(a,b) - Math.min(a, b);
+          //return find_gcd(b,a%b);
+      }
+}

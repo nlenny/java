@@ -1,0 +1,113 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Node{
+    int data;
+    Node next;
+    Node(int newData){
+        this.data=newData;
+    }
+}
+
+class Link{
+    Node head;
+    Link(){
+        this.head=null;
+    }
+    
+    Node addToHead(Node head, int input){
+        Node newNode = new Node(input);
+        if(head == null){
+            return head = newNode;
+        }
+        newNode.next = head;
+        head = newNode;
+        printList(head); 
+        lengthOfList(head); 
+        return head;
+    }
+    
+    int lengthOfList(Node head){
+        Node curr = head;
+        int count = 0;
+        while(curr != null){
+            count++;
+            curr = curr.next; 
+        } 
+        System.out.println("The number of Nodes are: " + count); 
+        return count;
+    }
+    
+    void deleteNode(Node head, Node searchNode){
+        Node curr = head;
+        if(head == searchNode){
+            head = head.next;
+            head = null;
+        }
+        while(curr.next != searchNode){
+            curr = curr.next;
+        }
+        if(curr.next == searchNode){
+            curr.next = searchNode.next;
+            searchNode = null;
+        }
+    }
+    
+    int addData(Node head){
+        int count = 0;
+        Node curr = head;
+        while(curr != null){
+            count = count + curr.data;
+            curr = curr.next;
+        }
+        System.out.println(count);
+        return count; 
+    }
+    
+    void printList(Node head){
+        Node curr = head;
+        while(curr != null){
+            if(curr.next == null){
+                System.out.print(curr.data);
+            }else{
+                System.out.print(curr.data + " -> ");
+            }
+            curr = curr.next;
+        }
+        System.out.println(); 
+    }
+}
+
+class A{
+    public static void main(String[] args){
+        Node one = new Node(11);
+        Node two = new Node(13); 
+        Node three = new Node(15);
+        Node four = new Node(16);
+        Node five = new Node(20);
+        
+        one.next = two;
+        two.next = three;
+        three.next = four;
+        four.next = five;
+        
+        Link a = new Link();
+        a.printList(one); 
+        a.addData(one); 
+        
+        Scanner reader = new Scanner(System.in);
+        int x = reader.nextInt();
+        int y = reader.nextInt();
+        int z = x + y;
+        System.out.println(x + " + " + y +" is: " + z); 
+        
+        //a.lengthOfList(one);
+        //System.out.println();
+        //a.deleteNode(one, three);
+        //a.printList(one); 
+        //a.lengthOfList(one);
+        //System.out.println();
+        //a.addToHead(one, 9);
+    }
+}

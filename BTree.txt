@@ -1,0 +1,242 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class TreeNode{
+    int data;
+    TreeNode leftChild;
+    TreeNode rightChild;
+    TreeNode parent;
+    
+    TreeNode(){} 
+    
+    TreeNode(int newData){
+        this.data = newData;
+    }
+}
+
+class BinaryTree{
+    
+    TreeNode root;
+    
+    BinaryTree(){
+        this.root = null; 
+    }
+    
+    void add(int inputData){
+        TreeNode nodeToAdd = new TreeNode(inputData); 
+        if(root == null){
+            root = nodeToAdd; 
+        }
+        //Recursive Adding to Binary Tree
+        traverseAndAddNode(root, nodeToAdd); 
+    }
+    
+    public void traverseAndAddNode(TreeNode node, TreeNode nodeToAdd){
+        if(nodeToAdd.data < node.data){
+            if(node.leftChild == null){
+                nodeToAdd.parent = node;
+                node.leftChild = nodeToAdd;
+            }else{
+                traverseAndAddNode(node.leftChild, nodeToAdd);
+            }
+        }
+        else if(nodeToAdd.data > node.data){
+            if(node.rightChild == null){
+                nodeToAdd.parent = node;
+                node.rightChild = nodeToAdd;
+            }else{
+                traverseAndAddNode(node.rightChild, nodeToAdd);
+            }
+        }
+    }
+    
+    public void inOrderTraverse(){
+        if(root != null){
+            TreeNode nodeToTraverse = root;
+            if(nodeToTraverse.leftChild == null && nodeToTraverse.rightChild == null){
+                System.out.println(nodeToTraverse.data); 
+            }else{
+                inorderTraversal(nodeToTraverse); 
+            }
+        }
+    }
+    
+    public void preOrderTraverse(){
+        if(root != null){
+            TreeNode nodeToTraverse = root;
+            if(nodeToTraverse.leftChild == null && nodeToTraverse.rightChild == null){
+                System.out.println(nodeToTraverse.data); 
+            }else{
+                preOrderTraversal(nodeToTraverse); 
+            }
+        }
+    }
+    
+    public void postOrderTraverse(){
+        if(root != null){
+            TreeNode nodeToTraverse = root;
+            if(nodeToTraverse.leftChild == null && nodeToTraverse.rightChild == null){
+                System.out.println(nodeToTraverse.data); 
+            }else{
+                postOrderTraversal(nodeToTraverse); 
+            }
+        }
+    }
+    
+    private void inorderTraversal(TreeNode node){
+        if(node.leftChild != null){
+            inorderTraversal(node.leftChild);
+        }
+        System.out.print(node.data + " "); 
+        if(node.rightChild != null){
+            inorderTraversal(node.rightChild); 
+        }
+    }
+    
+    private void preOrderTraversal(TreeNode node){
+        System.out.print(node.data + " ");
+        if(node.leftChild != null){
+            preOrderTraversal(node.leftChild);
+        }
+        if(node.rightChild != null){
+            preOrderTraversal(node.rightChild); 
+        }
+    }
+    
+    private void postOrderTraversal(TreeNode node){
+        if(node.leftChild != null){
+            postOrderTraversal(node.leftChild);
+        }
+        if(node.rightChild != null){
+            postOrderTraversal(node.rightChild); 
+        }
+        System.out.print(node.data + " ");
+    }
+    
+    //***** DELETING BTREE NODES WITH HELPER METHODES ********
+    
+    // DELETE METHOD
+    public boolean delete(int value){
+        //Case 2: TreeNode has one child
+        //Case 3: TreeNode has two children
+        
+        TreeNode nodeToBeDeleted = find(value); 
+        //Case 1: TreeNode has no children
+        if(nodeToBeDeleted != null){
+            if(nodeToBeDeleted.leftChild == null & nodeToBeDeleted.rightChild == null){
+                //To Delete a TreeNode, we need a reference to it's parent also
+                //Was done in the add method above
+                deleteCaseOne(nodeToBeDeleted); 
+            }
+            else if(nodeToBeDelete.leftChild != null){
+                //Case 2, where leftChild needs to be deleted
+                deleteCaseTwo(nodeToBeDeleted);
+            }
+            else if(nodeToBeDeleted.rightChild != null){
+                //Case 2, where rightChild needs to  be deleted
+                deleteCaseTwo(nodeToBeDeleted); 
+            }
+            else{
+                //Case 3
+                deleteCaseThree(nodeToBeDeleted); 
+            }
+        }
+        
+        return false;
+    }
+    
+    //Case 1 Deletion. TreeNode for Deletion has no children
+    
+    private void deleteCaseOne(TreeNode nodeToBeDeleted){
+        if(nodeToBeDeleted.parent.leftChild == nodeToBeDeleted){
+            nodeToBeDeleted.parent.leftChild = null;
+        }
+        else if(nodeToBeDeleted.parent.rightChild == nodeToBeDeleted){
+            nodeToBeDeleted.parent.rightChild = null; 
+        }
+    }
+    
+    //Case 2 Deletion. TreeNode for Deletion has 1 child
+    
+    private void deleteCaseTwo(TreeNode nodeToBeDeleted){
+        if(nodeToBeDeleted.parent.leftChild == nodeToBeDeleted){
+            if(nodeToBeDeleted.parent.leftChild != null){
+                nodeToBeDeleted.parent.leftChild = nodeToBeDeleted.leftChild;
+            }
+            else if(nodeToBeDeleted.parent.rightChild != null){
+                nodeToBeDeleted.parent.rightChild = nodeToBeDeleted.rightChild;
+            }
+        }
+        else if(nodeToBeDeleted.parent.rightChild == nodeToBeDeleted){
+            if(nodeToBeDeleted.parent.leftChild != null){
+                nodeToBeDeleted.parent.rightChild = nodeToBeDeleted.leftChild;
+            }
+            else if(nodeToBeDeleted.parent.rightChild != null){
+                nodeToBeDeleted.parent.rightChild = nodeToBeDeleted.rightChild;
+            }
+        }
+    }
+    
+    //Case 3 Deletion. TreeNode for Deletion has 2 Children
+    
+    private void deleteCaseThree(TreeNode nodeToBeDeleted){
+        
+    }
+    
+    
+    //********* FIND METHOD
+    public TreeNode find(int value){
+        if(root != null){
+            return findNode(root, new TreeNode(value));
+        }
+        return null; 
+    }
+    
+    private TreeNode findNode(TreeNode searchNode, TreeNode node){
+        if(searchNode == null){
+            return null;
+        }
+        if(searchNode.data == node.data){
+            return searchNode;
+        }else{
+            TreeNode returnNode = findNode(searchNode.leftChild, node);
+            if(returnNode == null){
+                returnNode = findNode(searchNode.rightChild, node);
+            }
+            return returnNode; 
+        }
+    }
+}
+
+class A{
+     
+    public static void main(String[] args){
+        
+        BinaryTree bTree = new BinaryTree();
+        
+        // Test Cases ****************************
+        bTree.add(50);
+        bTree.add(25);
+        bTree.add(75);
+        bTree.add(10);
+        bTree.add(30);
+        bTree.add(60);
+        bTree.add(65);
+        bTree.add(80);
+        bTree.add(85);
+        bTree.add(1);
+        bTree.add(100);
+    
+        System.out.print("In-Order   Traversal: ");
+        bTree.inOrderTraverse(); 
+        System.out.println();
+        System.out.print("Pre-Order  Traversal: ");
+        bTree.preOrderTraverse();
+        System.out.println(); 
+        System.out.print("Post-Order Traversal: ");
+        bTree.postOrderTraverse();
+        System.out.println(); 
+        
+    }
+}

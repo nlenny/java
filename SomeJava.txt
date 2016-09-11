@@ -1,0 +1,42 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class A {
+    
+    A(){} 
+    
+    public void isPrime(){
+        int count = 0;
+        while(count < 5){
+           for(int i = 0; i < 5; i++){
+               if(i % 2 == 1 && i * 1 == i){
+                   System.out.print(i + " ");
+                }
+            }
+            count++;
+        }
+    }
+    
+    public static void main(String[] args){
+        A a1 = new A();
+        a1.isPrime(); 
+        
+        Scanner a = new Scanner(System.in);
+        String str = a.nextLine();
+        int strLength = str.length(); 
+        System.out.println("The length of the String you entered is: " + strLength);
+        System.out.println("The string you entered in uppercase is: " + str.toUpperCase()); 
+        
+        boolean isThere = false;
+        
+        CharSequence three = "ord"; 
+        
+        if(str.contains(three)){
+            isThere = true;
+            System.out.println(isThere);
+        }else{
+            System.out.println(isThere); 
+        }
+    }
+}

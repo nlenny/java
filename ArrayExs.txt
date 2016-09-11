@@ -1,0 +1,84 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class JavaTrials{
+   
+    void writeBack(){
+        Scanner s = new Scanner(System.in); 
+        System.out.println("Enter your line: ");
+        String str = s.nextLine();
+        System.out.println("You entered the following sentence: ");
+        System.out.println(str); 
+    }
+    
+    void addNumbers(){
+        Scanner sc = new Scanner(System.in); 
+        System.out.println("Enter your first number: ");
+        int a = Integer.parseInt(sc.nextLine()); 
+        System.out.println("Enter your second number: ");
+        int b = Integer.parseInt(sc.nextLine()); 
+        int c = a + b; 
+        System.out.println("The sum is: " + c);
+    }
+    
+    int[][] arrayManipulations(int size){
+        System.out.println("Let's create a 2 x 2 integer array and populate it");
+        int[][] checker = new int[size][size];
+        for(int i = 0; i < checker.length; i++){
+            for(int j = 0; j < checker.length; j++){
+                checker[i][j] = 0; 
+            }
+        }
+        
+        printArray(checker); 
+        System.out.println(); 
+        firstAndLastIsOne(checker); 
+        return checker;
+    }
+    
+    void printArray(int[][] arr1){
+        for(int i = 0; i < arr1.length; i++){
+            for(int j = 0; j < arr1.length; j++){
+                System.out.print(arr1[i][j] + " | ");
+            }
+            System.out.println(); 
+        }
+    }
+    
+    void firstAndLastIsOne(int[][] arr){
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr.length; j++){
+                if( (i == 0 && j == 0) || (i == arr.length-1 && j == arr.length-1)){
+                    arr[i][j] = 9;
+                }
+            }
+        }
+        printArray(arr); 
+        addArrayMembers(arr); 
+    }
+    
+    void addArrayMembers(int[][] arr){
+        int sum = 0; 
+        for(int i = 0; i < arr.length; i++){
+            for(int j = 0; j < arr.length; j++){
+                sum += arr[i][j];
+            }
+        }
+        System.out.print("The sum of the array members is: "); 
+        System.out.println(sum);
+    }
+    
+}
+
+class A{
+    
+    public static void main(String[] args){
+        
+        JavaTrials j = new JavaTrials();
+        //j.addNumbers(); 
+        //j.writeBack(); 
+        
+        j.arrayManipulations(4); 
+    }
+}

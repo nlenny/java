@@ -1,0 +1,113 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class EightQueens {
+    private static int board[][];
+    private int numOfQueens; 
+    
+    EightQueens(){
+        numOfQueens = 0;
+        board = new int[4][4];
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                board[i][j] = 0;
+            }
+        }
+    }
+    
+    boolean get(int x, int y){
+        if(x < 0 || x > 3 || y < 0 || y > 3){
+            return false;
+        }
+        if(board[x][y] == 1){
+            return true;
+        }
+        //If board position == 1 return true, else return false
+        return false; 
+    }
+    
+    boolean validMove(int x, int y){
+        for(int i = 0; i < 4; i++){
+            if(get(x, i)){
+                return false;
+            }
+            if(get(i, y)){
+                return false;
+            }
+            if(get(x-i, y-i)){
+                return false;
+            }
+            if(get(x-i, y+i)){
+                return false;
+            }
+            if(get(x+i, y-i)){
+                return false;
+            }
+            if(get(x+i, y+i)){
+                return false;
+            }
+        }
+        //return true that it is safe to place a queen;
+        return true;
+    }
+    
+    int placeQueen(int x, int y, boolean validMove){
+        if(validMove){
+            board[x][y] = 1;
+            numOfQueens++;
+            return 0;
+        }else{
+            if(!validMove){
+                board[x][y] = 0;
+                return 0;
+            }
+        }
+        //Else we return say a -1 if we get to the end and still haven't placed
+        return -1;
+    }
+    
+    boolean solve(int numOfQueens){
+        //base condition
+        if(numOfQueens == 4){
+            printBoard();
+            return true;
+        }else{
+            for(int i = 0; i < 4; i++){
+                for(int j = 0; j < 4; j++){
+                    if(validMove(i, j)){
+                        placeQueen(i, j, true);
+                        numOfQueens++;
+                        if(solve(numOfQueens)){
+                            return true;
+                        }else{
+                            placeQueen(i, j, false);
+                            numOfQueens--;
+                        }
+                    }
+                }
+            }
+        }
+        //And return false if we haven't found a solution
+        return false;
+    }
+    
+    void printBoard(){
+        for(int i = 0; i < 4; i++){
+            for(int j = 0; j < 4; j++){
+                System.out.print(board[i][j] + " ");
+            }
+            System.out.println(); 
+        }
+    }
+}
+
+
+class A{
+    
+    public static void main(String[] args){
+        
+        EightQueens board = new EightQueens();
+        board.solve(0);// Meaning there will be 0 queens to start with
+    }
+}

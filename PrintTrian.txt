@@ -1,0 +1,31 @@
+public class Triangle{
+    
+    Triangle(){} 
+    
+    public void formTriangle(){
+        for(int row = 0; row < 5; row++){
+            for(int col = 0; col < 5; col++){
+                if(row <= col){
+                    System.out.print("*");
+                }
+            }
+            System.out.println();
+        }
+    }
+    public void formTriangle1(){
+        for(int row = 0; row < 5; row++){
+            for(int col = 0; col < 5; col++){
+                if(col <= row){
+                    System.out.print("*");
+                }
+            }
+            System.out.println(); 
+        }
+    }
+    
+    public static void main(String[] args){
+        Triangle t1 = new Triangle();
+        t1.formTriangle();
+        t1.formTriangle1(); 
+    }
+}

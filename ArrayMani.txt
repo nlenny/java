@@ -1,0 +1,30 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class SliceArray{
+    
+    public void sliceTheArray(){
+        Scanner in = new Scanner(System.in);
+        
+        String[] countries = new String[10]; 
+        
+        for(int i = 0; i < countries.length; i++){
+            countries[i] = in.nextLine();
+        }
+        System.out.println(); 
+        
+        for(int j = 0; j < countries.length; j++){
+            if(j >= 2 && j <= 6){
+                System.out.println(countries[j] + " ");
+            }
+        } 
+    }
+}
+
+class A{
+    public static void main(String[] args){
+        SliceArray sa = new SliceArray();
+        sa.sliceTheArray(); 
+    } 
+}

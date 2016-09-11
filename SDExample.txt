@@ -1,0 +1,31 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class A {
+    
+    private String state = "";
+    
+    public void setState(String newState){
+        state = newState;
+    }
+    
+    public void doAction(){
+        if(state.equalsIgnoreCase("ON")){
+            System.out.println("The TV is turned ON");
+        }else{
+            if(state.equalsIgnoreCase("OFF")){
+                System.out.println("The TV is turned OFF");
+            }
+        }
+    }
+    
+    public static void main(String[] args){
+        
+        A tvRemote = new A();
+        tvRemote.setState("ON");
+        tvRemote.doAction();
+        tvRemote.setState("OFF");
+        tvRemote.doAction();
+    }
+}

@@ -1,0 +1,107 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+//********************** INTERFACE **************************************
+interface State {
+     
+    public void doAction();
+}
+
+//********************** TVStartState ***********************************
+class GeneOne implements State { 
+    @Override
+    public void doAction(){
+        System.out.println("A");
+    }
+}
+
+//****************** TvVolumeUp ******************************************
+class GeneTwo implements State {
+    @Override
+    public void doAction(){
+        System.out.println("B");
+    }
+}
+
+//*****************TvVolumeDown *****************************************
+class GeneThree implements State {
+    @Override
+    public void doAction(){
+        System.out.println("C");
+    }
+}
+
+
+//********************* TVStartState ************************************
+class GeneFour implements State {
+    @Override
+    public void doAction(){
+        System.out.println("D");
+    }
+}
+
+//********************* TVContext ***************************************
+class GeneContext implements State {
+    private State tvState;
+    
+    public void setState(State newState){
+        this.tvState = newState;
+    }
+    
+    public State getState(){
+        return this.tvState;
+    }
+    
+    @Override
+    public void doAction(){
+        tvState.doAction();
+    }
+}
+
+//******************** 
+class geneSequencing {
+    
+    public boolean checkGeneSequence(String input1, String input2){
+        boolean isAMatch = false;
+        char[] arr1 = input1.toCharArray();
+        char[] arr2 = input2.toCharArray();
+        
+            if(Arrays.equals(arr1, arr2)){
+                //context.doAction();
+                isAMatch = true;
+                System.out.println("IT'S A MATCH");
+            }else{
+                isAMatch = false;
+                System.out.println("DOES NOT MATCH");
+            }
+        return isAMatch; 
+    }
+    
+    public static void main(String[] args){
+        GeneContext genom = new GeneContext();
+        geneSequencing gg = new geneSequencing();
+        String g1 = "ABC";
+        String g2 = "ABD";
+        System.out.println(gg.checkGeneSequence(g1, g2)); 
+        
+        
+        
+        State one = new GeneOne();
+        State two = new GeneTwo();
+        State three = new GeneThree();
+        State four = new GeneFour();
+        
+        genom.setState(one);
+        genom.doAction();
+        
+        genom.setState(two);
+        genom.doAction(); 
+        
+        genom.setState(three);
+        genom.doAction();
+        
+        genom.setState(four); 
+        genom.doAction();
+    }
+}

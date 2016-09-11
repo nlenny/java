@@ -1,0 +1,103 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class Node {
+    int data;
+    Node next = null;
+    
+    Node(int newData, Node newNext){
+        data = newData;
+        next = newNext;
+    }
+}
+
+class ll {
+    Node head;
+    
+    ll(Node input){
+       head = input;  
+    }
+    
+    public Node addToEnd(int value){
+        Node newNode = new Node(value, null);
+        if(head == null){
+            head = newNode;
+            return head;
+        }
+        Node curr = head;
+        while(curr.next == null){
+            curr.next = newNode;
+            curr = curr.next;
+        } 
+        return head;
+    }
+    
+    public Node addToMiddle(Node searchNode, int value){
+        Node newNode = new Node(value, null);
+        if(searchNode == head){
+            head.next = newNode;
+            return head;
+        }
+        Node curr = head;
+        while(curr.next != null && curr.next != searchNode){
+            curr = curr.next;
+            if(curr.next != null && curr.next == searchNode){
+                Node temp = searchNode.next;
+                searchNode.next = newNode;
+                newNode.next = temp;
+            }
+        }
+        return head;
+    }
+     
+    public Node addToHead(Node inputNode, int value){
+        Node newNode = new Node(value, null);
+        if(head == null){
+            head = newNode;
+        }
+        return head;
+    }
+    
+    public void printList(Node input){
+        Node curr = head;
+        while(curr.next != null){
+            System.out.print(curr.data + " | ");
+            curr = curr.next;
+            if(curr.next == null){
+                System.out.print(curr.data); 
+                System.out.println();
+                System.out.println("This is the end of the list"); 
+            }
+        }
+        System.out.println(); 
+    }
+}
+
+class A {
+    
+    public static void main(String[] args){
+        
+        Node head = new Node(4, null);
+        Node first = new Node(5, null);
+        Node second = new Node(6, null);
+        Node third = new Node(7, null);
+        Node fourth = new Node(8, null);
+        Node fifth = new Node(9, null);
+        Node tail = new Node(10, null);
+        
+        head.next = first;
+        first.next = second;
+        second.next = third;
+        third.next = fourth;
+        fourth.next = fifth;
+        fifth.next = tail;
+        
+        ll newList = new ll(head);
+        System.out.println("Before Adding");
+        newList.printList(head);
+        newList.addToMiddle(second, 11);
+        System.out.println("After Adding");
+        newList.printList(head); 
+    }
+}

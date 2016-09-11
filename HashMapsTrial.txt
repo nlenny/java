@@ -1,0 +1,36 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*; 
+
+class Trial{
+    
+    void hashConcepts(){
+        HashMap<Integer, String> order = new HashMap<Integer, String>(); 
+        
+        order.put(1, "Kim");
+        order.put(2, "Sharon");
+        order.put(3, "Mya");
+        order.put(4, "Michelle");
+        order.put(5, "Tricia"); 
+        
+        Set entries = order.entrySet();
+        Iterator it = entries.iterator();
+        
+        while(it.hasNext()){
+            Map.Entry t = (Map.Entry)it.next(); 
+            if(t == null){ 
+                System.out.println("The Hash Table is Empty"); 
+            }else
+            System.out.print(t.getKey() + " " + t.getValue()); 
+            System.out.println(); 
+        }
+    }
+}
+
+class A{
+    
+    public static void main(String[] args){
+        Trial t1 = new Trial(); 
+        t1.hashConcepts(); 
+    }
+}

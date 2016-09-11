@@ -1,0 +1,100 @@
+import java.util.*;
+import java.io.*;
+
+class A{
+    A(){} 
+    
+    public boolean geneSequencing(String dataOne, String dataTwo){
+        
+        boolean isASequence = false;
+        
+        if(dataOne.length() == 0 || dataTwo.length() == 0){
+            isASequence = false;
+            return isASequence;
+        }
+        
+        Map<Integer, String> hMap1 = new HashMap<Integer, String>();
+        Map<Integer, String> hMap2 = new HashMap<Integer, String>();
+        String[] charOne;
+        try{
+            for(int i = 0; i < dataOne.length(); i++){
+                charOne = dataOne.split(" ");
+                hMap1.put(i, charOne[i]);
+            }
+            String[] charTwo;
+            for(int j = 0; j < dataTwo.length(); j++){
+                charTwo = dataTwo.split(" ");
+                hMap2.put(j, charTwo[j]);
+            }
+        }catch(Exception e){
+            System.out.println("The following exception was thrown: " + e);
+        }
+        
+        if(hMap1.equals(hMap2)){
+            System.out.println(hMap1.values());
+            isASequence = true;
+        }else{
+            System.out.println("NO MATCH");
+            isASequence = false;
+        }
+        return isASequence;
+    }
+    
+    
+    public static void main(String[] args){
+        A a1 = new A();
+        
+        
+        String input1 = "A B C D E F G";
+        String input2 = "A B C D E F G";
+        
+        a1.geneSequencing(input1, input2);
+        
+        HashMap<Integer, String> geneOne = new HashMap<Integer, String>();
+        HashMap<Integer, String> geneTwo = new HashMap<Integer, String>();
+        
+        // Use a for loop to fill the HashMap with the String Characters
+        //for(int i = 0; i < input1.length(); i++){
+          //  char[] charArrayOne = input1.toCharArray(); 
+            //System.out.print(charArrayOne[i] + " | ");
+        //}
+        
+        //System.out.println();
+        
+        //for(int j = 0; j < input2.length(); j++){
+          //  char[] charArrayTwo = input2.toCharArray(); 
+            //System.out.print(charArrayTwo[j] + " | ");
+        //}
+        
+        //System.out.println();
+        
+        
+        geneOne.put(1, "C");
+        geneOne.put(2, "A");
+        geneOne.put(3, "T");
+        
+        geneTwo.put(1, "C");
+        geneTwo.put(2, "A");
+        geneTwo.put(3, "A");
+        
+        System.out.println("Gene One State is: " + geneOne.get(1));
+        System.out.println("Gene Two State is: " + geneTwo.get(2));
+        
+        System.out.println();
+        
+        Set<String> first = new HashSet<>(geneOne.values());
+        Set<String> second = new HashSet<>(geneTwo.values());
+        
+        
+        
+        if(geneOne.equals(geneTwo)){
+            System.out.println(geneOne.values());
+        }else{
+            System.out.println("NO MATCH");
+        }
+        
+        //for(String g : geneOne.values()){
+          //  System.out.print(g + " --> ");
+        //}
+    }
+}

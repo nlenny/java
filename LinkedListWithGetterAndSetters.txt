@@ -1,0 +1,38 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class Node<T extends Comparable<T>>{
+    private T data;
+    private Node<T> next;
+    
+    public Node(T newData){
+        this.data = newData;
+        setNext(null); 
+    }
+    
+    public Node<T> getNext(){
+        return next;
+    }
+    
+    public void setNext(Node<T> nextNode){
+        this.next = nextNode;
+    }
+    
+    public T getData(){
+        return data;
+    }
+    
+    //@Override
+    //public String toString(){
+      //  return String.valueOF(data); 
+    //}
+}
+
+class Link
+
+class A {
+    public static void main(String[] args){
+        System.out.println("New Class"); 
+    }
+}

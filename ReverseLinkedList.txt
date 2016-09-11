@@ -1,0 +1,67 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+
+class Node{
+   String value;
+   Node next;
+   
+   Node(String v, Node n){
+       value = v;
+       next = n;
+   }
+}
+
+class ReverseLinkedList{
+    Node head = null;
+    
+    ReverseLinkedList(Node input){
+        head = input;
+    }
+    
+    void solve(){
+        Node prev = null;
+        Node curr = head;
+        while(curr != null){
+            Node tmp = curr.next;
+            curr.next = prev;
+            prev = curr;
+            curr = tmp;
+        }
+        if(prev.value == null){
+            head = prev;
+        }
+        printResult(head);
+    }
+    
+    void printResult(Node curr){
+        curr = head;
+        while(curr != null){
+            System.out.print(curr.value + " --> ");
+            curr = curr.next;
+        }
+        System.out.println(); 
+    }
+}
+    
+class A{
+    public static void main(String[] args){
+        
+        Node a = new Node("CAT", null);
+        Node b = new Node("DOG", null);
+        Node c = new Node("HORSE", null);
+        Node d = new Node("LION", null);
+        Node e = new Node("TIGER", null);
+        Node tail = new Node(null, null);
+        
+        a.next = b;
+        b.next = c;
+        c.next = d;
+        d.next = e;
+        e.next = tail;
+        
+        ReverseLinkedList r1 = new ReverseLinkedList(a);   
+        r1.solve();
+    }
+}

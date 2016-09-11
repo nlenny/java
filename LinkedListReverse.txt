@@ -1,0 +1,95 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+class Node{
+    int data;
+    Node next;
+    Node(int newData){
+        this.data=newData;
+        this.next=null;
+    }
+}
+
+class Link{
+    Node head;
+    Link(){
+        this.head=null;
+    }
+    
+    Node addToTail(Node head, int value){
+        Node newNode = new Node(value);
+        if(head == null){
+            return head=newNode;
+        }
+        Node curr = head;
+        while(curr.next != null){
+            curr = curr.next;
+        }
+        if(curr.next == null){
+            curr.next = newNode;
+        }
+        return head;
+    }
+    
+    void printList(Node head){
+        Node curr = head;
+        while(curr != null){
+            if(curr.next == null){
+                System.out.print(curr.data);
+            }else{
+                System.out.print(curr.data + " -> ");
+            }
+            curr = curr.next;
+        }
+        System.out.println(); 
+    }
+    
+    Node reverseList(Node node) {
+        if(node == null || node.next == null){
+            return node;
+        }
+        Node currentNode = node;
+        Node previousNode = null;
+        Node nextNode = null;
+    
+        while(currentNode != null){
+            nextNode = currentNode.next;
+            currentNode.next = previousNode;
+            previousNode = currentNode;
+            currentNode = nextNode;
+        }
+        printList(previousNode); 
+        return previousNode;
+    }
+    
+    Node reverseLinkedList(Node currentNode){ 
+        Node previousNode=null;  
+        Node nextNode;  
+        while(currentNode!=null){
+            nextNode=currentNode.next;
+            currentNode.next=previousNode;
+            previousNode=currentNode;
+            currentNode=nextNode;
+        }
+        return previousNode;
+    }
+    
+}
+
+class A{
+    public static void main(String[] args){
+        Node one = new Node(1);
+        Node two = new Node(2);
+        Node three = new Node(3);
+        one.next = two;
+        two.next = three;
+        
+        Link start = new Link();
+        start.printList(one); 
+        start.addToTail(one, 4);
+        start.printList(one); 
+        
+        start.reverseList(one); 
+    }
+}

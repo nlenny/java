@@ -1,0 +1,56 @@
+import java.io.*;
+import java.lang.*;
+import java.util.*;
+
+public class A{
+    
+    A(){} 
+    
+    public boolean geneSequencing(String one, String two){
+        
+        boolean geneMatch = false;
+        
+        LinkedList a1 = new LinkedList();
+        LinkedList a2 = new LinkedList();
+        
+        String[] newOne = new String[one.length()]; 
+        String[] newTwo = new String[two.length()];
+        
+        char[] arr1 = one.toCharArray();
+        char[] arr2 = two.toCharArray(); 
+        
+        for(int i = 0; i < arr1.length; i++){
+            a1.add(String.valueOf(arr1[i])); 
+        }
+        System.out.println(a1);
+        
+        for(int j = 0; j < arr2.length; j++){
+            a2.add(String.valueOf(arr2[j]));
+        }
+        System.out.println(a2);
+        
+        //Solving the problem 
+        while(a1 != null || a2 != null){
+            if(a1.equals(a2)){  
+                geneMatch = true;
+            }else{
+                geneMatch = false;
+            }
+            a1 = null;
+            a2 = null;
+        }
+        System.out.println(geneMatch); 
+        return geneMatch; 
+    }
+    
+    public static void main(String[] args){
+        
+        String inputOne = "ABC";
+        String inputTwo = "ABC";
+        
+        System.out.println();
+        
+        A t1 = new A();
+        t1.geneSequencing(inputOne, inputTwo);
+    }
+}

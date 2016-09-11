@@ -1,0 +1,72 @@
+import java.util.*;
+import java.io.*;
+import java.lang.*;
+
+class TowersOfHanoi {
+    private Stack<Integer> stackOfDisks;
+    
+    TowersOfHanoi(int value){
+        stackOfDisks = new Stack<Integer>(); 
+    }
+    
+    void add(int value){
+        if(stackOfDisks.isEmpty()){
+            stackOfDisks.push(value);
+        }else{
+            if(stackOfDisks.peek() >= value){
+                stackOfDisks.push(value); 
+            }
+        }
+    }
+    
+    void transferDisk(TowersOfHanoi tower){
+        int top = stackOfDisks.pop();
+        tower.add(top); 
+    }
+    
+    void solve(int n, TowersOfHanoi dest, TowersOfHanoi spare){
+        if(n > 0){
+            solve(n-1, spare, dest);
+            transferDisk(dest);
+            spare.solve(n-1, dest, this);
+        }
+    }
+    
+    void printDisks(String towerName){
+        Integer curr = null;
+        System.out.print(towerName + " "); 
+        if(stackOfDisks.isEmpty()){
+            System.out.println("Empty"); 
+        }else{
+            while(!stackOfDisks.isEmpty()){
+                curr = stackOfDisks.pop();
+                System.out.print(curr + " ");
+            }
+        }
+        System.out.println(); 
+    }
+}
+
+class A {
+    
+    public static void main(String[] args){
+        int numOfDisks = 5;
+        TowersOfHanoi[] towers = new TowersOfHanoi[numOfDisks]; 
+        //Creating 3 towers
+        for(int i = 0; i < 3; i++){
+            towers[i] = new TowersOfHanoi(i); 
+        }
+        //Putting all disks onto tower 1
+        for(int i = numOfDisks; i >= 0; i--){
+            towers[0].add(i); 
+        }
+        
+        towers[0].solve(numOfDisks, towers[1], towers[2]);
+        
+        //After moving
+        System.out.println("After Moving: ");
+        towers[0].printDisks("Tower 1: ");
+        towers[1].printDisks("Tower 2: ");
+        towers[2].printDisks("Tower 3: "); 
+    }
+}

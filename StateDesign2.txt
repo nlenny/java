@@ -1,0 +1,84 @@
+import java.util.*;
+import java.lang.*;
+import java.io.*;
+
+//********************** INTERFACE **************************************
+interface State {
+    public void doAction();
+}
+
+//********************** TVStartState ***********************************
+class TVStartState implements State {
+    @Override
+    public void doAction(){
+        System.out.println("The TV is turned OFF");
+    }
+}
+
+//****************** TvVolumeUp ******************************************
+class TvVolumeUp implements State {
+    @Override
+    public void doAction(){
+        System.out.println("Increasing TV Volume");
+    }
+}
+
+//*****************TvVolumeDown *****************************************
+class TvVolumeDown implements State {
+    @Override
+    public void doAction(){
+        System.out.println("Decreasing TV Volume");
+    }
+}
+
+
+//********************* TVStartState ************************************
+class TVStopState implements State {
+    @Override
+    public void doAction(){
+        System.out.println("The TV is turned ON");
+    }
+}
+
+//********************* TVContext ***************************************
+class TVContext implements State {
+    private State tvState;
+    
+    public void setState(State newState){
+        this.tvState = newState;
+    }
+    
+    public State getState(){
+        return this.tvState;
+    }
+    
+    @Override
+    public void doAction(){
+        tvState.doAction();
+    }
+}
+
+//******************** 
+class TVRemote {
+    
+    public static void main(String[] args){
+        
+        TVContext context = new TVContext();
+        State tvStartState = new TVStartState();
+        State tvStopState = new TVStopState();
+        State volumeUp = new TvVolumeUp();
+        State volumeDown = new TvVolumeDown();
+        
+        context.setState(volumeUp);
+        context.doAction();
+        
+        context.setState(volumeDown);
+        context.doAction(); 
+        
+        context.setState(tvStartState);
+        context.doAction();
+        
+        context.setState(tvStopState); 
+        context.doAction();
+    }
+}
